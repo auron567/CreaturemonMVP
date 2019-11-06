@@ -2,10 +2,12 @@ package com.example.creaturemonmvp.di
 
 import android.app.Application
 import androidx.room.Room
+import com.example.creaturemonmvp.model.CreatureGenerator
 import com.example.creaturemonmvp.model.CreatureRepository
 import com.example.creaturemonmvp.model.room.CreatureDao
 import com.example.creaturemonmvp.model.room.CreatureDatabase
 import com.example.creaturemonmvp.model.room.RoomRepository
+import com.example.creaturemonmvp.presenter.CreaturePresenter
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
@@ -17,6 +19,8 @@ val appModule = module {
     single { provideCreatureDao(get()) }
     // CreatureRepository instance
     single<CreatureRepository> { provideRoomRepository(get()) }
+    // CreaturePresenter instance
+    factory { provideCreaturePresenter(CreatureGenerator()) }
 }
 
 private fun provideCreatureDatabase(application: Application): CreatureDatabase {
@@ -30,4 +34,8 @@ private fun provideCreatureDao(creatureDatabase: CreatureDatabase): CreatureDao 
 
 private fun provideRoomRepository(creatureDao: CreatureDao): RoomRepository {
     return RoomRepository(creatureDao)
+}
+
+private fun provideCreaturePresenter(generator: CreatureGenerator): CreaturePresenter {
+    return CreaturePresenter(generator)
 }
