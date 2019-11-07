@@ -35,4 +35,30 @@ class CreaturePresenterTest {
             mockView.showHitPoints(50)
         }
     }
+
+    @Test
+    fun testStrengthSelected() {
+        val attributes = CreatureAttributes(0, 7, 0)
+        val stubCreature = Creature(attributes, 21, "Test Creature")
+        every { mockGenerator.generateCreature(attributes) } returns stubCreature
+
+        creaturePresenter.attributeSelected(AttributeType.STRENGTH, 2)
+
+        verify(exactly = 1) {
+            mockView.showHitPoints(21)
+        }
+    }
+
+    @Test
+    fun testEnduranceSelected() {
+        val attributes = CreatureAttributes(0, 0, 3)
+        val stubCreature = Creature(attributes, 12, "Test Creature")
+        every { mockGenerator.generateCreature(attributes) } returns stubCreature
+
+        creaturePresenter.attributeSelected(AttributeType.ENDURANCE, 1)
+
+        verify(exactly = 1) {
+            mockView.showHitPoints(12)
+        }
+    }
 }
