@@ -14,6 +14,8 @@ interface CreatureContract {
         fun drawableSelected(drawable: Int)
 
         fun isDrawableSelected(): Boolean
+
+        fun saveCreature()
     }
 
     interface View {
@@ -21,5 +23,9 @@ interface CreatureContract {
         fun showHitPoints(hitPoints: Int)
 
         fun showAvatarDrawable(@DrawableRes drawable: Int)
+
+        fun showCreatureSaved()
+
+        fun showCreatureSavedError()
     }
 }

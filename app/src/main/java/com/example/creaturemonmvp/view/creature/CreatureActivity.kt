@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.creaturemonmvp.R
+import com.example.creaturemonmvp.app.toast
 import com.example.creaturemonmvp.model.AttributeStore
 import com.example.creaturemonmvp.model.AttributeType
 import com.example.creaturemonmvp.model.AttributeValue
@@ -108,7 +109,7 @@ class CreatureActivity : AppCompatActivity(), AvatarListener, CreatureContract.V
         }
 
         saveButton.setOnClickListener {
-            // TODO: handle save button clicked
+            presenter.saveCreature()
         }
     }
 
@@ -127,5 +128,14 @@ class CreatureActivity : AppCompatActivity(), AvatarListener, CreatureContract.V
 
     override fun showAvatarDrawable(drawable: Int) {
         avatarImageView.setImageResource(drawable)
+    }
+
+    override fun showCreatureSaved() {
+        toast(R.string.creature_saved)
+        finish()
+    }
+
+    override fun showCreatureSavedError() {
+        toast(R.string.error_saving_creature)
     }
 }

@@ -1,9 +1,6 @@
 package com.example.creaturemonmvp.presenter
 
-import com.example.creaturemonmvp.model.AttributeType
-import com.example.creaturemonmvp.model.Creature
-import com.example.creaturemonmvp.model.CreatureAttributes
-import com.example.creaturemonmvp.model.CreatureGenerator
+import com.example.creaturemonmvp.model.*
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -12,13 +9,14 @@ import org.junit.Test
 
 class CreaturePresenterTest {
     private val mockGenerator: CreatureGenerator = mockk()
+    private val mockRepository: CreatureRepository = mockk()
     private val mockView: CreatureContract.View = mockk(relaxed = true)
 
     private lateinit var creaturePresenter: CreaturePresenter
 
     @Before
     fun setup() {
-        creaturePresenter = CreaturePresenter(mockGenerator).apply {
+        creaturePresenter = CreaturePresenter(mockGenerator, mockRepository).apply {
             setView(mockView)
         }
     }
