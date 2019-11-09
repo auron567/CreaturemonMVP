@@ -12,5 +12,6 @@
     <string name="save">Save</string>
     <string name="creature_saved">Creature saved!</string>
     <string name="error_saving_creature">Please complete all fields</string>
+    <string name="creatures_cleared">Creatures cleared</string>
     <string name="content_description_creature_avatar">Creature Avatar</string>
 </resources>

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.creaturemonmvp.R
 import com.example.creaturemonmvp.app.inflate
 import com.example.creaturemonmvp.model.Creature
+import kotlinx.android.synthetic.main.list_item_creature.view.*
 
 class CreatureAdapter(private val creatures: MutableList<Creature>)
     : RecyclerView.Adapter<CreatureAdapter.ViewHolder>() {
@@ -20,13 +21,23 @@ class CreatureAdapter(private val creatures: MutableList<Creature>)
         holder.bind(creatures[position])
     }
 
+    fun updateCreatures(creatures: List<Creature>) {
+        this.creatures.clear()
+        this.creatures.addAll(creatures)
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var creature: Creature
 
         fun bind(creature: Creature) {
             this.creature = creature
 
-            // TODO: populate views
+            with(itemView) {
+                avatarImageView.setImageResource(creature.drawable)
+                name.text = creature.name
+                hitPoints.text = creature.hitPoints.toString()
+            }
         }
     }
 }
