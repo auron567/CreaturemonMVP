@@ -4,8 +4,9 @@ import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.example.creaturemonmvp.model.Creature
 import com.example.creaturemonmvp.model.CreatureRepository
+import javax.inject.Inject
 
-class RoomRepository(private val creatureDao: CreatureDao) : CreatureRepository {
+class RoomRepository @Inject constructor(private val creatureDao: CreatureDao) : CreatureRepository {
 
     override fun saveCreature(creature: Creature) {
         InsertAsyncTask(creatureDao).execute(creature)

@@ -1,8 +1,9 @@
 package com.example.creaturemonmvp.presenter
 
 import com.example.creaturemonmvp.model.*
+import javax.inject.Inject
 
-class CreaturePresenter(
+class CreaturePresenter @Inject constructor(
     private val generator: CreatureGenerator,
     private val repository: CreatureRepository
 ) : BasePresenter<CreatureContract.View>(), CreatureContract.Presenter {

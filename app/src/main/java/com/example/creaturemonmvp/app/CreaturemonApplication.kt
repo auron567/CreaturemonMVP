@@ -1,20 +1,12 @@
 package com.example.creaturemonmvp.app
 
 import android.app.Application
-import com.example.creaturemonmvp.di.appModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
+import com.example.creaturemonmvp.di.AppComponent
+import com.example.creaturemonmvp.di.DaggerAppComponent
 
 class CreaturemonApplication : Application() {
 
-    override fun onCreate() {
-        super.onCreate()
-
-        startKoin {
-            androidLogger()
-            androidContext(this@CreaturemonApplication)
-            modules(appModule)
-        }
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent.factory().create(this)
     }
 }

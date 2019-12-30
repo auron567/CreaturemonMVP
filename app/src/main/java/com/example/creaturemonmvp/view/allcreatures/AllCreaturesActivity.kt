@@ -8,19 +8,23 @@ import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.creaturemonmvp.R
+import com.example.creaturemonmvp.app.CreaturemonApplication
 import com.example.creaturemonmvp.app.toast
 import com.example.creaturemonmvp.presenter.AllCreaturesContract
 import com.example.creaturemonmvp.presenter.AllCreaturesPresenter
 import com.example.creaturemonmvp.view.creature.CreatureActivity
 import kotlinx.android.synthetic.main.activity_all_creatures.*
-import org.koin.android.ext.android.inject
+import javax.inject.Inject
 
 class AllCreaturesActivity : AppCompatActivity(), AllCreaturesContract.View {
-    private val presenter: AllCreaturesPresenter by inject()
+    @Inject lateinit var presenter: AllCreaturesPresenter
 
     private val adapter = CreatureAdapter(mutableListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as CreaturemonApplication).appComponent
+            .allCreaturesComponent().create().inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_creatures)
 

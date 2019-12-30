@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.creaturemonmvp.R
+import com.example.creaturemonmvp.app.CreaturemonApplication
 import com.example.creaturemonmvp.app.toast
 import com.example.creaturemonmvp.model.AttributeStore
 import com.example.creaturemonmvp.model.AttributeType
@@ -18,12 +19,15 @@ import com.example.creaturemonmvp.presenter.CreaturePresenter
 import com.example.creaturemonmvp.view.avatar.AvatarBottomDialogFragment
 import com.example.creaturemonmvp.view.avatar.AvatarListener
 import kotlinx.android.synthetic.main.activity_creature.*
-import org.koin.android.ext.android.inject
+import javax.inject.Inject
 
 class CreatureActivity : AppCompatActivity(), AvatarListener, CreatureContract.View {
-    private val presenter: CreaturePresenter by inject()
+    @Inject lateinit var presenter: CreaturePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as CreaturemonApplication).appComponent
+            .creatureComponent().create().inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creature)
 
